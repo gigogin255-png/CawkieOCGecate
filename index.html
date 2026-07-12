@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Моя статья</title>
+    <style>
+        /* ===== ОСНОВНЫЕ ЦВЕТА (ЗАМЕНИТЕ ЗНАЧЕНИЯ) ===== */
+        :root {
+            --main-color: #6C63FF;    /* Основной цвет (фиолетовый) */
+            --accent-color: #FF6584;   /* Акцентный цвет (розовый) */
+            --bg-gradient-start: #f5f7fa;
+            --bg-gradient-end: #c3cfe2;
+            --text-color: #2d3436;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
+            color: var(--text-color);
+            line-height: 1.8;
+        }
+
+        /* ===== ЗАГОЛОВКИ ===== */
+        h1 {
+            font-size: 2.5em;
+            text-align: center;
+            background: linear-gradient(45deg, var(--main-color), var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 30px;
+        }
+
+        h2 {
+            color: var(--main-color);
+            border-bottom: 3px solid var(--accent-color);
+            padding-bottom: 10px;
+            margin: 30px 0 15px;
+        }
+
+        /* ===== ВЫДЕЛЕНИЕ ТЕКСТА ===== */
+        .highlight {
+            background: linear-gradient(120deg, rgba(108, 99, 255, 0.2), rgba(255, 101, 132, 0.2));
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+            color: var(--main-color);
+        }
+
+        /* ===== ЦИТАТЫ ===== */
+        .quote {
+            background: white;
+            padding: 20px 25px;
+            border-left: 5px solid var(--accent-color);
+            border-radius: 0 12px 12px 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            font-style: italic;
+            margin: 20px 0;
+        }
+
+        /* ===== ЦВЕТНЫЕ БЛОКИ ===== */
+        .info-box {
+            background: rgba(108, 99, 255, 0.1);
+            padding: 18px 22px;
+            border-radius: 12px;
+            border: 2px solid var(--main-color);
+            margin: 20px 0;
+        }
+
+        .warning-box {
+            background: rgba(255, 101, 132, 0.1);
+            padding: 18px 22px;
+            border-radius: 12px;
+            border: 2px solid var(--accent-color);
+            margin: 20px 0;
+        }
+
+        .success-box {
+            background: rgba(46, 213, 115, 0.15);
+            padding: 18px 22px;
+            border-radius: 12px;
+            border: 2px solid #2ed573;
+            margin: 20px 0;
+        }
+
+        /* ===== КНОПКИ ===== */
+        .button {
+            display: inline-block;
+            background: linear-gradient(45deg, var(--main-color), var(--accent-color));
+            color: white;
+            padding: 14px 30px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(108, 99, 255, 0.3);
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(108, 99, 255, 0.4);
+        }
+
+        /* ===== КАРТИНКИ ===== */
+        .image-container {
+            margin: 25px 0;
+            text-align: center;
+        }
+
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 16px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+            border: 3px solid white;
+        }
+
+        .image-caption {
+            margin-top: 8px;
+            color: #636e72;
+            font-size: 0.9em;
+        }
+
+        /* ===== ДЛЯ КАРТИНОК В РЯД ===== */
+        .image-row {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 25px 0;
+        }
+
+        .image-row .image-container {
+            flex: 1;
+            min-width: 150px;
+            margin: 0;
+        }
+
+        .image-row img {
+            border-radius: 12px;
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        /* ===== ИНТЕРАКТИВ (чек-лист) ===== */
+        .checklist {
+            background: white;
+            padding: 20px 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+            margin: 20px 0;
+        }
+
+        .checklist label {
+            display: block;
+            padding: 8px 0;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .checklist label:hover {
+            color: var(--main-color);
+        }
+
+        .checklist input[type="checkbox"] {
+            accent-color: var(--main-color);
+            width: 18px;
+            height: 18px;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+
+        /* ===== ПРОГРЕСС-БАР (интерактив) ===== */
+        .progress-container {
+            background: #e9ecef;
+            border-radius: 20px;
+            height: 25px;
+            margin: 20px 0;
+            overflow: hidden;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.06);
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--main-color), var(--accent-color));
+            border-radius: 20px;
+            width: 0%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 13px;
+            transition: width 1s ease;
+        }
+
+        /* ===== АДАПТАЦИЯ ДЛЯ ТЕЛЕФОНОВ ===== */
+        @media (max-width: 600px) {
+            body {
+                padding: 15px;
+                margin: 20px auto;
+            }
+            h1 { font-size: 1.8em; }
+            .image-row { flex-direction: column; }
+            .image-row .image-container { min-width: auto; }
+            .button { 
+                display: block; 
+                text-align: center; 
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ================================================ -->
+    <!-- ===== ТЕКСТ ВАШЕЙ СТАТЬИ (ЗАМЕНИТЕ НА СВОЙ) ===== -->
+    <!-- ================================================ -->
+
+    <h1>🌟 Название вашей статьи</h1>
+
+    <p>
+        Здесь напишите вступление. Это ваш первый абзац. Расскажите, о чем статья, 
+        почему это важно и что читатель узнает.
+    </p>
+
+    <h2>📌 Первый раздел</h2>
+
+    <p>
+        Текст вашего первого раздела. Используйте <span class="highlight">выделение</span> 
+        для ключевых слов и фраз.
+    </p>
+
+    <div class="quote">
+        "Это ваша цитата. Она может быть из книги, от известного человека или ваш собственный тезис."
+    </div>
+
+    <p>Продолжайте писать текст. Когда захотите что-то подчеркнуть, используйте блоки:</p>
+
+    <div class="info-box">
+        💡 <strong>Важная информация:</strong> Здесь можно написать полезный совет или ключевую мысль.
+    </div>
+
+    <div class="warning-box">
+        ⚠️ <strong>На заметку:</strong> Это блок для предупреждений или особо важных моментов.
+    </div>
+
+    <div class="success-box">
+        ✅ <strong>Результат:</strong> А это для позитивных итогов и достижений.
+    </div>
+
+    <h2>📸 Визуальный контент</h2>
+
+    <p>Вот пример вставки картинок (пока это заглушки, замените ссылки):</p>
+
+    <!-- ===== ОДНА КАРТИНКА ===== -->
+    <div class="image-container">
+        <img src="https://picsum.photos/800/400?random=1" alt="Пример картинки">
+        <div class="image-caption">Подпись к картинке</div>
+    </div>
+
+    <!-- ===== НЕСКОЛЬКО КАРТИНОК В РЯД ===== -->
+    <div class="image-row">
+        <div class="image-container">
+            <img src="https://picsum.photos/400/300?random=2" alt="Фото 1">
+            <div class="image-caption">Фото 1</div>
+        </div>
+        <div class="image-container">
+            <img src="https://picsum.photos/400/300?random=3" alt="Фото 2">
+            <div class="image-caption">Фото 2</div>
+        </div>
+        <div class="image-container">
+            <img src="https://picsum.photos/400/300?random=4" alt="Фото 3">
+            <div class="image-caption">Фото 3</div>
+        </div>
+    </div>
+
+    <h2>🎯 Интерактивные элементы</h2>
+
+    <!-- ===== ЧЕК-ЛИСТ ===== -->
+    <div class="checklist">
+        <p><strong>Ваш чек-лист:</strong></p>
+        <label><input type="checkbox"> Пункт первый</label>
+        <label><input type="checkbox"> Пункт второй</label>
+        <label><input type="checkbox"> Пункт третий</label>
+    </div>
+
+    <!-- ===== ПРОГРЕСС-БАР ===== -->
+    <p><strong>Прогресс выполнения:</strong></p>
+    <div class="progress-container">
+        <div class="progress-bar" style="width: 65%;">65%</div>
+    </div>
+
+    <!-- ===== КНОПКА ===== -->
+    <p style="text-align: center; margin: 30px 0;">
+        <a href="#" class="button">🚀 Нажми меня</a>
+    </p>
+
+    <p style="color: #888; font-size: 0.9em; text-align: center; margin-top: 40px;">
+        Создано с ❤️ для Telegram Mini App
+    </p>
+
+    <!-- ===== НЕБОЛЬШОЙ СКРИПТ ДЛЯ ИНТЕРАКТИВА ===== -->
+    <script>
+        // При клике на кнопку
+        document.querySelector('.button')?.addEventListener('click', function(e) {
+            e.preventDefault();
+            alert('Привет! Это ваша интерактивная кнопка 🎉');
+        });
+
+        // Прогресс-бар оживает при наведении
+        document.querySelector('.progress-container')?.addEventListener('mouseenter', function() {
+            const bar = this.querySelector('.progress-bar');
+            bar.style.width = '100%';
+            bar.textContent = '100%';
+        });
+
+        document.querySelector('.progress-container')?.addEventListener('mouseleave', function() {
+            const bar = this.querySelector('.progress-bar');
+            bar.style.width = '65%';
+            bar.textContent = '65%';
+        });
+    </script>
+
+</body>
+</html>
